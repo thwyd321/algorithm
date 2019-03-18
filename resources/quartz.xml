@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd ">
+	
+	<!-- 二维码交易保障 -->
+	<bean name="tranEnsureJobDetail" class="com.yudi.job.TranEnsureJobDetail" />
+	<bean name="tranEnsureJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="tranEnsureJobDetail" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="tranEnsureTrigger"
+		  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="tranEnsureJob" />
+		<property name="cronExpression" value="0 */1 * * * ?" />
+	</bean>
+
+    
+    <!-- 总调度用于启动Spring定时器 -->  
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">  
+            <list>
+            	<ref bean="tranEnsureTrigger" />
+            </list>
+        </property>
+    </bean>
+	
+</beans>

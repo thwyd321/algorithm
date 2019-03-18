@@ -1,0 +1,9 @@
+#应用配置
+spring:
+  application:
+    name: mytest
+  profiles:
+    active: dev
+server:
+  context-path: /mytest
+  port: 8100

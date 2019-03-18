@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://139.129.207.223:3306/transaction_db"
+                        userId="root" password="liwanshuju2017">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 修改实体存放路径 -->
+        <javaModelGenerator targetPackage="com.yudi.tran.entity" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 修改.xml文件存放路径 -->
+        <sqlMapGenerator targetPackage="com.yudi.tran.mapper" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 修改Dao 存放路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yudi.tran.dao" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--
+            每次生成的时候只需修改table里的属性即可
+            tableName: 表名
+            domainObjectName: 实体名
+            mapperName: Dao名
+        -->
+        <table tableName="m_tran_qr_metro" domainObjectName="TranQrMetro" mapperName="TranQrMetroDao"/>
+        <!--<table tableName="m_channel_distribute_conf" domainObjectName="ChannelDistributeConf" mapperName="ChannelDistributeConfDao" />
+        <table tableName="m_tran_qr_info" domainObjectName="TranQrInfo" mapperName="TranQrInfoDao" />-->
+        <!--<table tableName="m_common_parameter" domainObjectName="CommonParameter" mapperName="CommonParameterDao" />-->
+        <!--<table tableName="m_verification_log" domainObjectName="VerificationLog" mapperName="VerificationLogDao" />-->
+    </context>
+</generatorConfiguration>

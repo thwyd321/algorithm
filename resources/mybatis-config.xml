@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 全局参数 -->
+	<settings>
+		<setting name="defaultStatementTimeout" value="60" />
+		<!-- 开启驼峰自动映射 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<!--Mybatis的拦截器 -->
+    <!--<plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql" />  
+            &lt;!&ndash; 该参数默认为false &ndash;&gt;
+            &lt;!&ndash; 设置为true时，使用RowBounds分页会进行count查询,也就是是否查询数据总条数 &ndash;&gt;
+            <property name="rowBoundsWithCount" value="true" />  
+        </plugin>  
+    </plugins>  -->
+</configuration>
