@@ -55,8 +55,13 @@ public class WebLogAspect {
 		String responseJson = objectMapper.writeValueAsString(ret);
 		long times;
 		Long start = timeLocal.get();
+		JSONObject jsonObject = null;
 		if (start != null) {
-			JSONObject jsonObject = JSONObject.parseObject(responseJson);
+			try {
+				jsonObject = JSONObject.parseObject(responseJson);
+			}catch (Exception e){
+				return;
+			}
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 			HttpServletRequest request = attributes.getRequest();
 			String url = request.getRequestURL().toString();

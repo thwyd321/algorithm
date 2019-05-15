@@ -1,5 +1,6 @@
 package com.yudi.test.controller;
 
+import com.yudi.websocket.MyWebSocket;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,17 @@ public class TestController {
         list.add(3);
         return new ResponseEntity(list,HttpStatus.OK);
 
+    }
+    @ResponseBody
+    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    public ResponseEntity<?> test1(String name) {
+        MyWebSocket.sendInfo("1111");
+
+        return new ResponseEntity(null,HttpStatus.OK);
+
+    }
+    @RequestMapping("/")
+    public String index() {
+        return "index";
     }
 }

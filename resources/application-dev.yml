@@ -7,9 +7,9 @@ spring:
         max-wait: 2000    # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-idle: 5    # 连接池中的最大空闲连接
         min-idle: 2    # 连接池中的最小空闲连接
-      host:
-      port:
-      database:
+      host: localhost
+      port: 6379
+      database: 0
       password:
   datasource:
       defaultDataSource: test
@@ -17,9 +17,9 @@ spring:
         test:
           type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: com.mysql.jdbc.Driver
-          username:
+          username: root
           password:
-          url:
+          url: jdbc:mysql://localhost:3306/miaosha?useUnicode=true&characterEncoding=UTF-8&useSSL=false
           hikari:
             maximum-pool-size: 100
             minimum-idle: 20
@@ -28,3 +28,22 @@ spring:
               prepStmtCacheSize: 250
               prepStmtCacheSqlLimit: 2048
               useServerPrepStmts: true
+  freemarker:
+      allow-request-override: false
+      allow-session-override: false
+      cache: false
+      charset: UTF-8
+      check-template-location: true
+      content-type : text/html
+      enabled : true
+      expose-request-attributes : false
+      expose-session-attributes: false
+      expose-spring-macro-helpers: true
+      prefer-file-system-access: true
+      suffix: .ftl
+      template-loader-path: classpath:/templates/
+      order: 1
+      settings:
+        template_update_delay: 0
+        default_encoding: UTF-8
+        classic_compatible: true
