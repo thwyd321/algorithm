@@ -18,7 +18,7 @@ public class Interview {
     @Test
     public void test1() {
         int [] nums1 = {1,2,3,5,8,9,9,9,10};
-        int [] nums2 = {1,2,3,5,8,9,9,9,10};
+        int [] nums2 = {1,2,3,4,8,9,9,9,10};
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         List<Integer> list = new ArrayList();

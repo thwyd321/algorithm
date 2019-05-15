@@ -12,9 +12,9 @@ spring:
       database:
       password:
   datasource:
-      defaultDataSource: customBusDB
+      defaultDataSource: test
       dynamic:
-        customBusDB:
+        test:
           type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: com.mysql.jdbc.Driver
           username:
