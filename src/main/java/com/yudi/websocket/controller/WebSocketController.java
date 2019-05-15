@@ -1,5 +1,4 @@
 package com.yudi.websocket.controller;
-
 import com.yudi.websocket.MyWebSocket;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -10,13 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 @Controller
 @RequestMapping("/websocket")
 public class WebSocketController {
@@ -29,8 +26,10 @@ public class WebSocketController {
     @RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
     public ResponseEntity<?> sendMessage(String userId,String message) {
         if (StringUtils.isEmpty(userId)){
+            //向全部人发送消息
             MyWebSocket.sendInfo(message);
         }else {
+            //向指定userId发送消息
             MyWebSocket.sendInfo(userId,message);
         }
 

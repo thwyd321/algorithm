@@ -18,6 +18,8 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -26,17 +28,15 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @ServerEndpoint(value = "/websocket/{userId}")
 @Component
 public class MyWebSocket {
-
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
      */
    // private static CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
     /**
-     * 为了区分不同的客户端改用ConcurrentHashMap
+     * 为了区分不同的客户端改用ConcurrentHashMap，每次客户端建立一个连接，就会存入一条记录，key为客户端的userId，value为socket连接实例
+     * 这样可以通过 userId来调用其指定的连接进行操作。
      */
     private static ConcurrentHashMap<String,MyWebSocket> webSocketMap = new ConcurrentHashMap<String,MyWebSocket>();
-
-
 
     /**
      * 与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -80,9 +80,11 @@ public class MyWebSocket {
         System.out.println(userId);
         this.session = session;
         webSocketMap.put(userId,this);
+        List list = new ArrayList();
+        webSocketMap.forEach((k,v)->list.add(k));
 //        addOnlineCount();
         System.out.println("有新连接加入！当前在线人数为" + webSocketMap.size());
-        sendInfo("当前共有" + webSocketMap.size() + " 位用户在线");
+        sendInfo("当前共有" + webSocketMap.size() + " 位用户在线,userId是:" +list.toString());
 
     }
 
@@ -92,6 +94,7 @@ public class MyWebSocket {
     @OnClose
     public void onClose(@PathParam("userId")String userId) {
         webSocketMap.remove(userId);
+        sendInfo("当前共有" + webSocketMap.size() + " 位用户在线");
         System.out.println("有一连接关闭！当前在线人数为" + webSocketMap.size());
     }
 
@@ -108,7 +111,6 @@ public class MyWebSocket {
         //群发消息
         sendInfo(message);
     }
-
     /**
      * 发生错误时调用
      */
