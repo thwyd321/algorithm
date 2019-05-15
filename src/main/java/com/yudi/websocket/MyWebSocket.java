@@ -15,25 +15,28 @@ package com.yudi.websocket;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
- * springboot
- * Created by yadong.zhang on com.zyd.websocket
- *
- * @author: yadong.zhang
- * @date: 2017/11/23 13:42
  */
-@ServerEndpoint(value = "/websocket")
+@ServerEndpoint(value = "/websocket/{userId}")
 @Component
 public class MyWebSocket {
 
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
      */
-    private static CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+   // private static CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+    /**
+     * 为了区分不同的客户端改用ConcurrentHashMap
+     */
+    private static ConcurrentHashMap<String,MyWebSocket> webSocketMap = new ConcurrentHashMap<String,MyWebSocket>();
+
+
 
     /**
      * 与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -44,38 +47,52 @@ public class MyWebSocket {
      * 群发自定义消息
      */
     public static void sendInfo(String message) {
-        for (MyWebSocket item : webSocketSet) {
+        webSocketMap.forEach((k,v)->{
             try {
-                item.sendMessage(message);
+                v.sendMessage(message);
             } catch (IOException e) {
-                continue;
+                e.printStackTrace();
             }
-        }
-    }
 
+        });
+    }
+    /**
+     * 向指定userId发送消息
+     */
+    public static void sendInfo(String userId,String message) {
+        webSocketMap.forEach((k,v)->{
+            try {
+                if (k.equals(userId)){
+                    v.sendMessage(message);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
     /**
      * 连接建立成功调用的方法
+     *
      */
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(@PathParam("userId")String userId, Session session) {
+        System.out.println(userId);
         this.session = session;
-        webSocketSet.add(this);
+        webSocketMap.put(userId,this);
 //        addOnlineCount();
-        System.out.println("有新连接加入！当前在线人数为" + webSocketSet.size());
-        try {
-            sendMessage("当前共有" + webSocketSet.size() + " 位用户在线");
-        } catch (IOException e) {
-            System.out.println("IO异常");
-        }
+        System.out.println("有新连接加入！当前在线人数为" + webSocketMap.size());
+        sendInfo("当前共有" + webSocketMap.size() + " 位用户在线");
+
     }
 
     /**
      * 连接关闭调用的方法
      */
     @OnClose
-    public void onClose() {
-        webSocketSet.remove(this);
-        System.out.println("有一连接关闭！当前在线人数为" + webSocketSet.size());
+    public void onClose(@PathParam("userId")String userId) {
+        webSocketMap.remove(userId);
+        System.out.println("有一连接关闭！当前在线人数为" + webSocketMap.size());
     }
 
     /**

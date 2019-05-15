@@ -34,7 +34,7 @@
 
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:8100/mytest/websocket");
+        websocket = new WebSocket("ws://localhost:8100/websocket/${userId}");
         //连接发生错误的回调方法
         websocket.onerror = function () {
             setMessageInnerHTML("与服务器连接失败...");

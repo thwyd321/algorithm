@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,16 +30,5 @@ public class TestController {
         return new ResponseEntity(list,HttpStatus.OK);
 
     }
-    @ResponseBody
-    @RequestMapping(value = "/test1", method = RequestMethod.GET)
-    public ResponseEntity<?> test1(String name) {
-        MyWebSocket.sendInfo("1111");
 
-        return new ResponseEntity(null,HttpStatus.OK);
-
-    }
-    @RequestMapping("/")
-    public String index() {
-        return "index";
-    }
 }

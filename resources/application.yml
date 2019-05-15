@@ -1,9 +1,9 @@
 #应用配置
 spring:
   application:
-    name: mytest
+    name:
   profiles:
     active: dev
 server:
-  context-path: /mytest
+  context-path:
   port: 8100
