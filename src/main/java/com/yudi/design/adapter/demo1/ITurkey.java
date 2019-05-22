@@ -1,4 +1,4 @@
-package com.yudi.design.adapter;
+package com.yudi.design.adapter.demo1;
 
 /**
  * @ClassName :ITurkey

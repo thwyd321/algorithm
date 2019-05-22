@@ -1,4 +1,4 @@
-package com.yudi.design.decorator;
+package com.yudi.design.decorator.demo1;
 
 /**
  * @ClassName :Mocha

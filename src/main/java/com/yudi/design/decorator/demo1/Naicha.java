@@ -1,13 +1,13 @@
-package com.yudi.design.decorator;
+package com.yudi.design.decorator.demo1;
 
 /**
- * @ClassName :Coffee
+ * @ClassName :Naicha
  * @Description :
  * @Author : wangyudi
- * @Date : 2019/5/13 15:56
+ * @Date : 2019/5/13 15:55
  * @Version :1.0
  */
-public class Coffee implements Beverage {
+public class Naicha implements Beverage {
     @Override
     public double cost() {
         return 1;
