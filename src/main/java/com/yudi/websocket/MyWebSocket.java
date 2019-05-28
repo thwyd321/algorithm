@@ -32,7 +32,7 @@ public class MyWebSocket {
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
      */
    // private static CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
-    /**
+    /**3
      * 为了区分不同的客户端改用ConcurrentHashMap，每次客户端建立一个连接，就会存入一条记录，key为客户端的userId，value为socket连接实例
      * 这样可以通过 userId来调用其指定的连接进行操作。
      */

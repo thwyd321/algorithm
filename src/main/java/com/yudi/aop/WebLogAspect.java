@@ -23,7 +23,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 @Component
 public class WebLogAspect {
-	private ThreadLocal<Long> timeLocal = new ThreadLocal<>();
+	private static ThreadLocal<Long> timeLocal = new ThreadLocal<>();
 	private Logger logger = Logger.getLogger(getClass());
 	
 	@Pointcut("execution(public * com.yudi.*.controller.*.*(..))")

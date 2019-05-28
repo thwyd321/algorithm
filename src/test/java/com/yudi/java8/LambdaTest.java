@@ -33,12 +33,36 @@ class Something{
 class Person {
     String firstName;
     String lastName;
-
+    int age;
     Person() {}
 
     Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
 public class LambdaTest {
@@ -88,11 +112,13 @@ public class LambdaTest {
         Person person = personSupplier.get();// new Person
     }
     @Test
-    public void testOptionals(HttpServletRequest request, HttpServletResponse response){
-        Person person = null;
-        String a = Optional.ofNullable(person).map(p -> p.firstName).orElse(null);
+    public void testOptionals(){
+        Person person = new Person();
+        person.firstName="2";
+        String a = Optional.ofNullable(person).filter(person1 -> person.firstName.equals("1")).map(p->person.firstName).orElse("2222");
+        int b = Optional.ofNullable(person).map(Person::getAge).orElse(0);
         System.out.println(a);
-        Cookie cookie = new Cookie("","");
+        System.out.println(b);
     }
 
 

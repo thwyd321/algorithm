@@ -71,12 +71,12 @@ public class Java8 {
         list1.add(student2);
         list1.add(student3);
         list1.parallelStream().filter(s -> s.getAge() != 1).collect(Collectors.toList()).forEach(student -> System.out.println(student.getAge()));
-        List<Integer> collect1 = list1.parallelStream().map(student -> student.getAge()).collect(Collectors.toList())   ;
+        /*List<Integer> collect1 = list1.parallelStream().map(student -> student.getAge()).collect(Collectors.toList())   ;
         boolean wang = list1.stream().noneMatch(student -> student.getName().startsWith("wang"));//
         int sum = list1.stream().mapToInt(s -> s.getAge()).sum();//计算所有age的和
         Optional<String> reduce = list.stream().reduce((s1, s2) -> s1 +"#"+ s2);//集合中每个元素相加
         List<Student> collect2 = list1.stream().peek(a -> a.setAge(10)).collect(Collectors.toList());//peek 与map peek没有返回值
-        collect2.forEach(a-> System.out.println(a.getAge()));
+        collect2.forEach(a-> System.out.println(a.getAge()));*/
     }
     @Test
     public void test1(){

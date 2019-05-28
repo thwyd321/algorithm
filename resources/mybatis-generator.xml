@@ -12,8 +12,8 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://139.129.207.223:3306/transaction_db"
-                        userId="root" password="liwanshuju2017">
+                        connectionURL="jdbc:mysql://localhost:3306/gmcs"
+                        userId="root" password="">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -21,18 +21,18 @@
         </javaTypeResolver>
 
         <!-- 修改实体存放路径 -->
-        <javaModelGenerator targetPackage="com.yudi.tran.entity" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="com.gome.shop.invoice.common.dto" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- 修改.xml文件存放路径 -->
-        <sqlMapGenerator targetPackage="com.yudi.tran.mapper" targetProject="./src/main/java">
+        <sqlMapGenerator targetPackage="com.gome.shop.invoice.elecdraw.mapper" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 修改Dao 存放路径 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yudi.tran.dao" targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.gome.shop.invoice.elecdraw.dao" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
@@ -42,7 +42,7 @@
             domainObjectName: 实体名
             mapperName: Dao名
         -->
-        <table tableName="m_tran_qr_metro" domainObjectName="TranQrMetro" mapperName="TranQrMetroDao"/>
+        <table tableName="order_invoice" domainObjectName="OrderInvoice" mapperName="OrderInvoiceDao"/>
         <!--<table tableName="m_channel_distribute_conf" domainObjectName="ChannelDistributeConf" mapperName="ChannelDistributeConfDao" />
         <table tableName="m_tran_qr_info" domainObjectName="TranQrInfo" mapperName="TranQrInfoDao" />-->
         <!--<table tableName="m_common_parameter" domainObjectName="CommonParameter" mapperName="CommonParameterDao" />-->
